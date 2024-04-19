@@ -1,0 +1,75 @@
+<!-- header section starts -->
+<header th:fragment="header" class="header_section long_section px-0">
+    <nav class="navbar navbar-expand-lg custom_nav-container">
+        <a class="navbar-brand" href="/">
+            <img style="width: 30px" src="/images/rec.png" alt="" />
+            <span> EcoPlast </span>
+        </a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class=""> </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+                    class="d-flex mx-auto flex-column flex-lg-row align-items-center"
+            >
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/"
+                        >Home <span class="sr-only">(current)</span></a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about"> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="quote_btn-container">
+                <a href="">
+                    <span> Login </span>
+                    <img style="width: 25px; height: 22px" th:src="@{/images/general/person-svgrepo-com.svg}" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- end header section -->
+<!-- info section -->
+<section th:fragment="info" class="info_section long_section">
+    <div class="container">
+        <div class="contact_nav">
+            <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span> Call : +38 (063) 123 12 23 </span>
+            </a>
+            <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> Email : eco_plast_ua@gmail.com </span>
+            </a>
+            <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span> Kyiv, Ukraine </span>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- end info_section -->
+
+<!-- footer section -->
+<footer th:fragment="footer" class="footer_section">
+    <div class="container">
+        <p>&copy; <span id="displayYear"></span> All Rights Reserved</p>
+    </div>
+</footer>
+<!-- footer section -->

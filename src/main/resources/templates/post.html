@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>EcoPlast</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-nicWGzFj2EBgvfhFdKXW+zI9dmK+O5aSXLEk/wG5V+4vGPT8EY3dk99ajJKhGSs6Z3mN61RZP6M6wzkPq3cjsQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link th:href="@{/css/responsive.css}" href="../static/css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+
+    <div th:insert="~{/fragments.html :: header}"></div>
+
+
+  </div>
+
+
+  <!-- blog section -->
+
+  <section class="blog_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2 th:text="${post.getBlogPostTitle()}">
+          Blog
+        </h2>
+      </div>
+      <div class="blog-post mt-2">
+        <div class="blog-post_topic">
+          <div class="image-container">
+            <img style="" th:src="@{/image/{id}(id = ${post.getPreviewImageId()})}" alt="">
+            <a th:href="@{/image/{id}(id = ${post.getPreviewImageId()})}" class="overlay">
+              <img style="width: 50px;" class="image-more" th:src="@{/images/general/search.svg}" alt=""> <!-- Значок лупи -->
+            </a>
+          </div>
+          <p class="text" style="" th:utext="${post.getBlogPostText()}"></p>
+        </div>
+        <div th:each="sub : ${post.getSubthemes()}" class="blog-post_subtheme mt-4">
+          <h3 th:text="${sub.getBlogPostSubthemeTitle()}"></h3>
+          <p class="mt-2" th:utext="${sub.getBlogPostSubthemeText()}"></p>
+        </div>
+        <div class="blog-post_images mt-5">
+          <div th:each="img, iterStat : ${images}" class="blog-post_image" th:class="${iterStat.index % 2 == 0} ? 'even' : 'odd'">
+            <img class="blog-post_img" th:src="@{/image/{id}(id = ${img.getId()})}" alt="">
+          </div>
+        </div>
+
+        <div th:each="video : ${post.getVideos()}" class="blog-post_videos mt-3">
+          <iframe th:src="@{${video.getBlogPostVideoLink()}}" class="video_player-frame" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+    </div>
+  </section>
+
+  <!-- end blog section -->
+
+  <div th:insert="~{/fragments.html :: info}"></div>
+  <div th:insert="~{/fragments.html :: footer}"></div>
+
+
+
+  <!-- jQery -->
+  <script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+  <!-- bootstrap js -->
+  <script src="/js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="/js/custom.js"></script>
+
+</body>
+
+</html>

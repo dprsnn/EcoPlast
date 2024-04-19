@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>EcoPlast</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+
+    <div th:insert="~{/fragments.html :: header}"></div>
+
+  </div>
+
+
+  <!-- blog section -->
+
+  <section class="blog_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Blog
+        </h2>
+      </div>
+      <div class="row">
+        <div th:each="post : ${blog_post}" class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img th:src="@{/image/{id}(id = ${post.getPreviewImageId()})}"  src="images/b1.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h5 th:text="${post.getBlogPostTitle()}">
+                Look even slightly believable. If you are
+              </h5>
+              <p th:text="${post.getPreviewText() + '...'}">
+                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+              </p>
+              <a th:href="@{/blog/post/{id}(id = ${post.getId()})}">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end blog section -->
+
+  <div th:insert="~{/fragments.html :: info}"></div>
+  <div th:insert="~{/fragments.html :: footer}"></div>
+
+
+
+  <!-- jQery -->
+  <script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+  <!-- bootstrap js -->
+  <script src="/js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="/js/custom.js"></script>
+
+</body>
+
+</html>
