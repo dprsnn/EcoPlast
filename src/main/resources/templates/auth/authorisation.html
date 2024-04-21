@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>EcoPlast</title>
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+    <!-- font awesome style -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <!-- form style -->
+    <link href="/css/authorisation.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+
+<div class="hero_area">
+
+    <div th:insert="~{/fragments.html :: header}"></div>
+
+</div>
+
+
+<!-- auth section -->
+<section class="auth_form">
+    <div class="container">
+        <div class="auth_form-block">
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link active"
+                            id="tab-login"
+                            data-mdb-pill-init
+                            href="#pills-login"
+                            role="tab"
+                            aria-controls="pills-login"
+                            aria-selected="true"
+                    >Login</a
+                    >
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                            class="nav-link"
+                            id="tab-register"
+                            data-mdb-pill-init
+                            href="#pills-register"
+                            role="tab"
+                            aria-controls="pills-register"
+                            aria-selected="false"
+                    >Register</a
+                    >
+                </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <!-- Pills content -->
+            <div class="tab-content">
+                <div
+                        class="tab-pane fade show active"
+                        id="pills-login"
+                        role="tabpanel"
+                        aria-labelledby="tab-login"
+                >
+                    <form action="/process_login" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <!-- Email input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input type="email" name="username" id="loginName" class="form-control" />
+                            <label class="form-label" for="loginName"
+                            >Email or username</label
+                            >
+                        </div>
+
+                        <!-- Password input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input
+                                    type="password"
+                                    id="loginPassword"
+                                    name="password"
+                                    class="form-control"
+                            />
+                            <label class="form-label" for="loginPassword">Password</label>
+                        </div>
+
+                        <!-- 2 column grid layout -->
+                        <div class="row mb-3">
+                            <a style="margin: 0 auto" href="#!">Forgot password?</a>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button
+                                type="submit"
+                                data-mdb-button-init
+                                data-mdb-ripple-init
+                                class="btn btn-primary btn-block mb-3 custom-btn"
+                        >
+                            Sign in
+                        </button>
+                        <div th:if="${verify}" style="color: green" class="error mt-1">
+                            Please verify your email
+                        </div>
+                        <div th:if="${hasErrors == true or verify == false}" style="color: red" class="error mt-1">
+                            Incorrect login or password :(
+                        </div>
+                    </form>
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="pills-register"
+                        role="tabpanel"
+                        aria-labelledby="tab-register"
+                >
+                    <form action="/auth/registration" method="post" th:object="${person}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <!-- Email input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input th:field="*{email}" type="email" id="registerEmail" class="form-control" />
+                            <label class="form-label" for="registerEmail">Email</label>
+                            <div style="color: red" th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}">ERROR</div>
+                        </div>
+
+                        <!-- Name input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input th:field="*{name}" type="text" id="registerName" class="form-control" />
+                            <label class="form-label" for="registerName">Name</label>
+                            <div style="color: red" th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">ERROR</div>
+                        </div>
+
+                        <!-- Password input -->
+                        <div style="position: relative" data-mdb-input-init class="form-outline mb-3">
+                            <input th:field="*{password}"
+                                    type="password"
+                                    id="registerPassword"
+                                    class="form-control"
+                            />
+                            <label class="form-label" for="registerPassword"
+                            >Password</label
+                            >
+                            <button style="border: none; position: absolute; top: 4px; right: 10px; }" type="button" class="btn btn-sm btn-outline-secondary" onclick="togglePasswordVisibility()">Show/Hide</button>
+                        </div>
+                            <div style="color: red" th:if="${#fields.hasErrors('password')}" class="error mt-2" th:errors="*{password}">ERROR</div>
+                        <!-- Submit button -->
+                        <button
+                                type="submit"
+                                data-mdb-button-init
+                                data-mdb-ripple-init
+                                class="btn btn-primary btn-block mb-3 custom-btn"
+                                onclick="alert()"
+                        >
+                            Sign in
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- Pills content -->
+        </div>
+    </div>
+</section>
+<!-- end auth section -->
+
+<!-- jQery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const loginTab = document.getElementById("tab-login");
+        const registerTab = document.getElementById("tab-register");
+        const loginForm = document.getElementById("pills-login");
+        const registerForm = document.getElementById("pills-register");
+
+        // Додаємо обробник події для кнопки "Зареєструватися"
+        registerTab.addEventListener("click", function (event) {
+            event.preventDefault();
+            // Активуємо вкладку "Зареєструватися"
+            registerTab.classList.add("active");
+            loginTab.classList.remove("active");
+            // Показуємо форму реєстрації та приховуємо форму входу
+            registerForm.classList.add("show", "active");
+            loginForm.classList.remove("show", "active");
+        });
+
+        // Додаємо обробник події для кнопки "Увійти"
+        loginTab.addEventListener("click", function (event) {
+            event.preventDefault();
+            // Активуємо вкладку "Увійти"
+            loginTab.classList.add("active");
+            registerTab.classList.remove("active");
+            // Показуємо форму входу та приховуємо форму реєстрації
+            loginForm.classList.add("show", "active");
+            registerForm.classList.remove("show", "active");
+        });
+    });
+
+    function togglePasswordVisibility() {
+        var passwordField = document.getElementById("registerPassword");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+            // Change button text to 'Show Password' when password is hidden
+            document.querySelector('button').textContent = 'Show Password';
+        }
+    }
+</script>
+
+</body>
+
+</html>

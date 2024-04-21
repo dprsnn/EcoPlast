@@ -1,204 +1,204 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
 
-    <title>EcoPlast</title>
+  <title>EcoPlast</title>
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
 
-    <!-- fonts style -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- fonts style -->
+  <link
+          href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+          rel="stylesheet"
+  />
 
-    <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
-  </head>
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
 
-  <body>
-    <div class="hero_area">
+<body>
+<div class="hero_area">
 
-      <div th:insert="~{/fragments.html :: header}"></div>
+  <div th:insert="~{/fragments.html :: header}"></div>
 
-      <!-- slider section -->
-      <section class="slider_section long_section">
-        <div id="customCarousel" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-5">
-                    <div class="detail-box">
-                      <h1>
-                        Save our planet <br />
-                        <span class="green">together</span>
-                      </h1>
-                      <p>
-                        Recycling plastic is crucial for preserving our
-                        environment and combating pollution. Plastic waste poses
-                        a significant threat to ecosystems, wildlife, and human
-                        health. By recycling plastic, we can reduce the amount
-                        of waste sent to landfills and minimize the need for new
-                        plastic production, which requires valuable resources
-                        and contributes to greenhouse gas emissions.
-                      </p>
-                      <div class="btn-box">
-                        <a href="" class="btn1"> Recycle plastic</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="img-box">
-                      <img
-                        class="eco-edu"
-                        src="images/Eco-education.svg"
-                        alt=""
-                      />
-                    </div>
+  <!-- slider section -->
+  <section class="slider_section long_section">
+    <div id="customCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="detail-box">
+                  <h1>
+                    Save our planet <br />
+                    <span class="green">together</span>
+                  </h1>
+                  <p>
+                    Recycling plastic is crucial for preserving our
+                    environment and combating pollution. Plastic waste poses
+                    a significant threat to ecosystems, wildlife, and human
+                    health. By recycling plastic, we can reduce the amount
+                    of waste sent to landfills and minimize the need for new
+                    plastic production, which requires valuable resources
+                    and contributes to greenhouse gas emissions.
+                  </p>
+                  <div class="btn-box">
+                    <a href="" class="btn1"> Recycle plastic</a>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- end slider section -->
-    </div>
-
-    <!-- about section -->
-
-    <section class="about_section layout_padding long_section">
-      <div class="container">
-        <div class="row reversed">
-          <div class="col-md-6 hidden-column">
-            <div class="img-box">
-              <img style="width: 100%" src="images/aboutUs.svg" alt="" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="detail-box">
-              <div class="heading_container">
-                <h2>About Us</h2>
-              </div>
-              <p>
-                Hello, we are a volunteer company called EcoPlast located in
-                Kyiv, Ukraine. Our main goal is to reduce greenhouse gas
-                emissions to save our planet from destruction. By using special
-                sorting equipment and engaging new volunteers, we can achieve
-                our goal. Don't stand aside - recycle bottles and polyethylene
-                bags.
-              </p>
-              <a href=""> Read More </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end about section -->
-
-    <!-- blog section -->
-
-    <section class="blog_section layout_padding">
-      <div class="container">
-        <div class="heading_container">
-          <h2>Latest Blog</h2>
-        </div>
-        <div class="row">
-          <div th:each="post : ${posts}" class="col-md-6 col-lg-4 mx-auto">
-            <div class="box">
-              <div class="img-box">
-                <img th:src="@{/image/{id}(id = ${post.getPreviewImageId()})}" src="images/b1.jpg" alt="" />
-              </div>
-              <div class="detail-box">
-                <h5 th:text="${post.getBlogPostTitle()}">Look even slightly believable. If you are</h5>
-                <p th:text="${post.getPreviewText()}">
-                  alteration in some form, by injected humour, or randomised
-                  words which don't look even slightly believable.
-                </p>
-                <a th:href="@{/blog/post/{id}(id = ${post.getId()})}"> Read More </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- end blog section -->
-
-    <!-- contact section -->
-    <section class="contact_section long_section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form_container">
-              <div class="heading_container">
-                <h2>Contact Us</h2>
-              </div>
-              <form action="">
-                <div>
-                  <input type="text" placeholder="Your Name" />
-                </div>
-                <div>
-                  <input type="text" placeholder="Phone Number" />
-                </div>
-                <div>
-                  <input type="email" placeholder="Email" />
-                </div>
-                <div>
-                  <input
-                          type="text"
-                          class="message-box"
-                          placeholder="Message"
+              <div class="col-md-7">
+                <div class="img-box">
+                  <img
+                          class="eco-edu"
+                          src="images/Eco-education.svg"
+                          alt=""
                   />
                 </div>
-                <div class="btn_box">
-                  <button>SEND</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="map_container">
-              <div class="map">
-                <div id="googleMap">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d325519.57561698504!2d30.2030538496179!3d50.401569780757896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf4ee15a4505%3A0x764931d2170146fe!2z0JrQuNC10LIsIDAyMDAw!5e0!3m2!1sru!2sua!4v1713466772873!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- end contact section -->
+    </div>
+  </section>
+  <!-- end slider section -->
+</div>
 
-    <div th:insert="~{/fragments.html :: info}"></div>
-    <div th:insert="~{/fragments.html :: footer}"></div>
+<!-- about section -->
+
+<section class="about_section layout_padding long_section">
+  <div class="container">
+    <div class="row reversed">
+      <div class="col-md-6 hidden-column">
+        <div class="img-box">
+          <img style="width: 100%" src="images/aboutUs.svg" alt="" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>About Us</h2>
+          </div>
+          <p>
+            Hello, we are a volunteer company called EcoPlast located in
+            Kyiv, Ukraine. Our main goal is to reduce greenhouse gas
+            emissions to save our planet from destruction. By using special
+            sorting equipment and engaging new volunteers, we can achieve
+            our goal. Don't stand aside - recycle bottles and polyethylene
+            bags.
+          </p>
+          <a href=""> Read More </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end about section -->
+
+<!-- blog section -->
+
+<section class="blog_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2>Latest Blog</h2>
+    </div>
+    <div class="row">
+      <div th:each="post : ${posts}" class="col-md-6 col-lg-4 mx-auto">
+        <div class="box">
+          <div class="img-box">
+            <img th:src="@{/image/{id}(id = ${post.getPreviewImageId()})}" src="images/b1.jpg" alt="" />
+          </div>
+          <div class="detail-box">
+            <h5 th:text="${post.getBlogPostTitle()}">Look even slightly believable. If you are</h5>
+            <p th:text="${post.getPreviewText()}">
+              alteration in some form, by injected humour, or randomised
+              words which don't look even slightly believable.
+            </p>
+            <a th:href="@{/blog/post/{id}(id = ${post.getId()})}"> Read More </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end blog section -->
+
+<!-- contact section -->
+<section class="contact_section long_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form_container">
+          <div class="heading_container">
+            <h2>Contact Us</h2>
+          </div>
+          <form action="">
+            <div>
+              <input type="text" placeholder="Your Name" />
+            </div>
+            <div>
+              <input type="text" placeholder="Phone Number" />
+            </div>
+            <div>
+              <input type="email" placeholder="Email" />
+            </div>
+            <div>
+              <input
+                      type="text"
+                      class="message-box"
+                      placeholder="Message"
+              />
+            </div>
+            <div class="btn_box">
+              <button>SEND</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="map_container">
+          <div class="map">
+            <div id="googleMap">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d325519.57561698504!2d30.2030538496179!3d50.401569780757896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf4ee15a4505%3A0x764931d2170146fe!2z0JrQuNC10LIsIDAyMDAw!5e0!3m2!1sru!2sua!4v1713466772873!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end contact section -->
+
+<div th:insert="~{/fragments.html :: info}"></div>
+<div th:insert="~{/fragments.html :: footer}"></div>
 
 
-    <!-- jQery -->
-    <script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
-    <!-- bootstrap js -->
-    <script src="/js/bootstrap.js"></script>
-    <!-- custom js -->
-    <script src="/js/custom.js"></script>
-  </body>
+<!-- jQery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+</body>
 </html>

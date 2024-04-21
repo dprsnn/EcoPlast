@@ -860,7 +860,54 @@ a:focus {
   }
 }
 
-.view-more{
-
+/*MyAccount*/
+.user_image{
+  display: flex;
+  justify-content: center;
 }
-
+.user_image-img{
+  width: 270px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.user_overlay{
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border-radius: 100%;
+  background: lightgrey;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.user_overlay:hover{
+  opacity: 50%;
+}
+.account_btn{
+  background: #2dad52 !important;
+  border: 0;
+}
+.info_content{
+  margin: 50px 0;
+}
+.requests{
+  margin: 0 0 50px 0;
+}
+.status_color{
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+}
+.request{
+  padding: 20px;
+  width: 100%;
+  background: #bdbdbd;
+  border-radius: 15px;
+}
+.req_title{
+  font-weight: 600;
+}

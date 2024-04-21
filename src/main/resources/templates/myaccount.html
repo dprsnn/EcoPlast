@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>EcoPlast</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+
+    <!-- fonts style -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+<div th:insert="~{/fragments.html :: header}"></div>
+
+<!-- User Info -->
+<div class="info_content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 user_image mb-2">
+                    <img class="user_image-img" src="/images/client.jpg" alt="User Icon">
+                    <div class="user_overlay">
+                        <p>Change icon</p>
+                    </div>
+            </div>
+            <div class="col-md-8">
+                <form class="user_inputs" method="post" action="/myaccount/changeInfo">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input class="form-control" name="name" th:value="${user.getName()}" type="text" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input class="form-control" name="email" th:value="${user.getEmail()}" type="email" id="email" readonly>
+                    </div>
+                    <div class="action d-flex justify-content-between mt-4">
+                        <div class="btns">
+                            <button class="mr-2 account_btn btn btn-primary" type="submit">Save</button>
+                            <a class="account_btn btn btn-primary" href="/logout">LogOut</a>
+                        </div>
+                        <a class="btn btn-danger" th:href="@{/myaccount/{id}/delete (id = ${user.getId()})}" onclick="return confirm('Ви впевнені, що хочете видалити акаунт?')">Delete account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!---->
+
+<!-- Orders -->
+<div class="requests">
+    <div class="container">
+        <div class="title d-flex justify-content-between mb-4">
+            <h3 style="font-weight: 600">Your Requests</h3>
+            <button class="btn account_btn btn-primary">New</button>
+        </div>
+        <div class="request mb-3 d-flex justify-content-center align-items-center">NOTHING YET</div>
+        <div class="request mb-3">
+            <div class="req_number d-flex mb-1">
+                <p class="req_title">Request number - </p>
+                <p>0088965</p>
+            </div>
+            <div class="req_type d-flex mb-1">
+                <p class="req_title">Type of plastic - </p>
+                <p>bottles</p>
+            </div>
+            <div class="req_weight d-flex mb-1">
+                <p class="req_title">Weight / amount - </p>
+                <p>0088965</p>
+            </div>
+            <div class="req_phone-number d-flex mb-1">
+                <p class="req_title">Phone number - </p>
+                <p>38 (063) 968 61 54</p>
+            </div>
+            <div class="req_status d-flex mb-1">
+                <div style="background: grey; margin-top: 5px;" class="status_color mr-3"></div>
+                <p>Pending</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!---->
+
+<div th:insert="~{/fragments.html :: info}"></div>
+<div th:insert="~{/fragments.html :: footer}"></div>
+
+
+<!-- jQery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+</body>
+</html>
