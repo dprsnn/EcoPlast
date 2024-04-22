@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Request {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double weight;
     private String phoneNumber;
@@ -23,6 +24,6 @@ public class Request {
     private PlasticCategory plasticCategory;
 
     @OneToOne
-    private PointAdress pointAdress;
+    private PointAddress pointAdress;
 
 }

@@ -1,5 +1,6 @@
 package com.dprsnn.UtilPlast.controllers;
 
+import com.dprsnn.UtilPlast.models.Request;
 import com.dprsnn.UtilPlast.repositories.PeopleRepository;
 import com.dprsnn.UtilPlast.services.PersonService;
 import com.dprsnn.UtilPlast.models.Person;
@@ -26,6 +27,7 @@ public class AccountController {
         Person person = peopleRepository.findPersonByEmail(authentication.getName());
         personService.setLastActivity(person);
         model.addAttribute("user", person);
+        model.addAttribute("request", new Request());
         return "myaccount";
     }
 }

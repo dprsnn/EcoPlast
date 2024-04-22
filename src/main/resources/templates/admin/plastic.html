@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>EcoPlast</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
+
+    <!-- fonts style -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <link
+            href="../../static/css/admin.css"
+            th:href="@{/css/admin.css}"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+    />
+
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="content">
+        <div
+                class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
+                style="width: 280px; background: #343a40"
+        >
+            <a class="navbar-brand" href="/">
+                <img style="width: 30px" src="/images/rec.png" alt="" />
+                <span style="color: white"> EcoPlast </span>
+            </a>
+
+            <hr />
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link"> Blog </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/users" class="nav-link"> Users </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/requests" class="nav-link"> Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/plastic" class="nav-link active bg-warning"> Plastic</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/contacts" class="nav-link"> Contact Us </a>
+                </li>
+            </ul>
+            <hr />
+        </div>
+
+        <div class="page_content">
+            <div class="container">
+                <h2>Plastic Types</h2>
+                <form th:action="@{/admin/plastic/add_category}" method="post" class="plastic_type">
+                    <div class="form-row align-items-center d-flex">
+                        <div class="col">
+                            <!-- Поле вводу з класом .form-control, що займає 80% -->
+                            <input type="text" name="category" class="form-control" placeholder="Write new plastic type">
+                        </div>
+                        <div class="col-auto ml-2">
+                            <!-- Кнопка з класом .btn, що займає 20% -->
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-dark table-striped mt-2">
+                    <thead>
+                    <tr>
+                        <th scope="col">category</th>
+                        <th scope="col">action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tab : ${categories}">
+                        <td th:text="${tab.getCategory()}">title</td>
+                        <td class="action_col" style="width: 90px">
+                            <a
+                                    th:class="edit"
+                                    th:href="@{/admin/plastic/edit_category/{id}(id = ${tab.getId()})}"
+                            ><img
+                                    style="width: 25px; height: 25px"
+                                    th:src="@{/images/general/edit.svg}"
+                                    alt="edit"
+                            /></a>
+                            <a
+                                    th:class="del"
+                                    id="del_"
+                                    onclick="return confirm('Ви впевнені, що хочете видалити категорію?')"
+                                    th:href="@{/admin/plastic/delete_category/{id}(id = ${tab.getId()})}"
+                                    class="ms-2"
+                                    href="#"
+                            ><img
+                                    style="width: 25px; height: 25px"
+                                    th:src="@{/images/general/delete.svg}"
+                                    alt="delete"
+                            /></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <h2 class="mt-4">Point addresses</h2>
+                <form action="" th:action="@{/admin/plastic/add_address}" method="post" class="point_addresses">
+                    <div class="form-row align-items-center d-flex">
+                        <div class="col">
+                            <!-- Поле вводу з класом .form-control, що займає 80% -->
+                            <input name="address" type="text" class="form-control" placeholder="Write new address">
+                        </div>
+                        <div class="col-auto ml-2">
+                            <!-- Кнопка з класом .btn, що займає 20% -->
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-dark table-striped mt-2">
+                    <thead>
+                    <tr>
+                        <th scope="col">address</th>
+                        <th scope="col">action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tab : ${addresses}">
+                        <td th:text="${tab.getAddress()}">title</td>
+                        <td class="action_col" style="width: 90px">
+                            <a
+                                    th:class="edit"
+                                    th:href="@{/admin/plastic/edit_address/{id}(id = ${tab.getId()})}"
+                            ><img
+                                    style="width: 25px; height: 25px"
+                                    th:src="@{/images/general/edit.svg}"
+                                    alt="edit"
+                            /></a>
+                            <a
+                                    th:class="del"
+                                    id="del"
+                                    onclick="return confirm('Ви впевнені, що хочете видалити адресу?')"
+                                    th:href="@{/admin/plastic/delete_address/{id}(id = ${tab.getId()})}"
+                                    class="ms-2"
+                                    href="#"
+                            ><img
+                                    style="width: 25px; height: 25px"
+                                    th:src="@{/images/general/delete.svg}"
+                                    alt="delete"
+                            /></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

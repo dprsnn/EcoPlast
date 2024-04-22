@@ -17,7 +17,7 @@
     <title>EcoPlast</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" th:href="@{css/bootstrap.css}" />
 
     <!-- fonts style -->
     <link
@@ -26,14 +26,20 @@
     />
 
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href=/css/myaccount.css>
 </head>
 
 <body>
+
+<div class="modal_ hidden">
+</div>
+<div class="overlay_ hidden"></div>
+
 <div th:insert="~{/fragments.html :: header}"></div>
 
 <!-- User Info -->
@@ -76,7 +82,7 @@
     <div class="container">
         <div class="title d-flex justify-content-between mb-4">
             <h3 style="font-weight: 600">Your Requests</h3>
-            <button class="btn account_btn btn-primary">New</button>
+            <button class="btn account_btn btn-primary show-modal">New</button>
         </div>
         <div class="request mb-3 d-flex justify-content-center align-items-center">NOTHING YET</div>
         <div class="request mb-3">
@@ -117,5 +123,38 @@
 <script src="/js/bootstrap.js"></script>
 <!-- custom js -->
 <script src="/js/custom.js"></script>
+
+<script>
+    const modalPost = document.querySelector(".modal_");
+    const overlayPost = document.querySelector(".overlay_");
+    const showModalBtn = document.querySelector(".show-modal");
+
+    showModalBtn.addEventListener("click", function () {
+        showModal(modalPost, overlayPost);
+    });
+
+    function showModal(modal, overlay) {
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+    }
+
+    overlayPost.addEventListener("click", function () {
+        hideModal(modalPost, overlayPost);
+    });
+
+    function hideModal(modal, overlay) {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+    }
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            if (!modalPost.classList.contains("hidden")) {
+                hideModal(modalPost, overlayPost);
+            }
+        }
+    });
+
+</script>
 </body>
 </html>
