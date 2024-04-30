@@ -23,7 +23,7 @@ import org.springframework.security.web.SecurityFilterChain;
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests()
                     .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/auth/login" ,"/auth/registration", "/error", "/verify", "/auth/resetPassword", "/reset", "/auth/changePassword").permitAll()
+                    .requestMatchers("/auth/login" ,"/auth/registration", "/error", "/verify", "/auth/resetPassword", "/reset", "/auth/changePassword", "/logout").permitAll()
                     .requestMatchers("/css/**", "/js/**", "/images/**", "/about").permitAll()
                     .requestMatchers("/", "/image/*","/blog", "/blog/post/*").permitAll()
                     .anyRequest().hasAnyRole("USER", "ADMIN")

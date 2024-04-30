@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>EcoPlast</title>
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+    <!-- font awesome style -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <!-- form style -->
+    <link href="/css/authorisation.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+
+<div class="hero_area">
+
+    <div th:insert="~{/fragments.html :: header}"></div>
+
+</div>
+
+
+<div class="container mt-5 mb-5">
+    <form th:action="@{/myaccount/request/{id}/save(id = ${request.getId()})}" method="post" class="mt-4">
+        <div class="mb-3">
+            <label for="category" class="form-label">Choose plastic type:</label>
+            <select id="category" class="form-select form-control" name="category" required>
+                <option th:each="cat : ${categories}"
+                        th:selected="${cat.getId() == request.getPlasticCategory().getId()}"
+                        th:text="${cat.getCategory()}"
+                        th:value="${cat.getId()}">
+                </option>
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Choose point address:</label>
+            <select id="address" class="form-select form-control" name="address" required>
+                <option selected disabled>Select point address</option>
+                <option th:selected="${add.getId() == request.getPointAdress().getId()}" th:each="add : ${addresses}" th:text="${add.getAddress()}" th:value="${add.getId()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Approximate weight / quantity:</label>
+            <input th:value="${request.getAmount()}" id="amount" placeholder="kg / quantity" type="text" name="amount" required class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="floatingTextarea">Comments:</label>
+            <textarea th:text="${request.getComment()}" class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+</div>
+
+<div th:insert="~{/fragments.html :: info}"></div>
+<div th:insert="~{/fragments.html :: footer}"></div>
+
+<!-- jQery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}" src=""></script>
+<!-- bootstrap js -->
+<script src="/js/bootstrap.js"></script>
+<!-- custom js -->
+<script src="/js/custom.js"></script>
+
+
+</body>
+
+</html>

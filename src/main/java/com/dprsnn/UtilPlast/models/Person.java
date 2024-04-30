@@ -30,6 +30,10 @@ public class Person {
     @Size(min = 1, max = 30, message = "Name should be between 1 and 30 characters")
     private String name;
 
+    @NotEmpty(message = "Surname should be not empty")
+    @Size(min = 1, max = 30, message = "Surname should be between 1 and 30 characters")
+    private String surname;
+
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     @Column(columnDefinition = "text")
@@ -39,6 +43,10 @@ public class Person {
     @NotEmpty(message = "Password should not be empty")
     @Pattern(regexp = "\\S+", message = "Password should not contain spaces")
     private String password;
+
+    @NotEmpty(message = "Phone number should be not empty")
+    private String phoneNumber;
+
 
     @Column(name = "verification_code", length = 64)
     private String verificationCode;

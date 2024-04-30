@@ -530,4 +530,7 @@ a.nav-link{
     color: #272727;
     text-transform: uppercase;
 }
+.req p {
+    margin-bottom: 5px;
+}
 

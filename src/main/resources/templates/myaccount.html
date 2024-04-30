@@ -18,6 +18,7 @@
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- fonts style -->
     <link
@@ -37,6 +38,36 @@
 <body>
 
 <div class="modal_ hidden">
+    <form th:action="@{/myaccount/create_request}" method="post" class="mt-4">
+        <h3 class="mt-2">Create a new Request</h3>
+        <div class="mb-3">
+            <label for="category" class="form-label">Choose plastic type:</label>
+            <select id="category" class="form-select" name="category" required>
+                <option selected disabled>Select plastic type</option>
+                <option th:each="cat : ${categories}" th:text="${cat.getCategory()}" th:value="${cat.getId()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Choose point address:</label>
+            <select id="address" class="form-select" name="address" required>
+                <option selected disabled>Select point address</option>
+                <option th:each="add : ${addresses}" th:text="${add.getAddress()}" th:value="${add.getId()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Approximate weight / quantity:</label>
+            <input id="amount" placeholder="kg / quantity" type="text" name="amount" required class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="floatingTextarea">Comments:</label>
+            <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
 </div>
 <div class="overlay_ hidden"></div>
 
@@ -47,20 +78,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 user_image mb-2">
-                    <img class="user_image-img" src="/images/client.jpg" alt="User Icon">
-                    <div class="user_overlay">
-                        <p>Change icon</p>
-                    </div>
+                <img class="user_image-img" src="/images/client.jpg" alt="User Icon">
+                <div class="user_overlay">
+                    <p>Change icon</p>
+                </div>
             </div>
             <div class="col-md-8">
                 <form class="user_inputs" method="post" action="/myaccount/changeInfo">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input class="form-control" name="email" th:value="${user.getEmail()}" type="email" id="email" readonly>
+                    </div>
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input class="form-control" name="name" th:value="${user.getName()}" type="text" id="name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input class="form-control" name="email" th:value="${user.getEmail()}" type="email" id="email" readonly>
+                        <label for="surname">Surname:</label>
+                        <input class="form-control" name="surname" th:value="${user.getSurname()}" type="text" id="surname">
                     </div>
                     <div class="action d-flex justify-content-between mt-4">
                         <div class="btns">
@@ -84,27 +119,49 @@
             <h3 style="font-weight: 600">Your Requests</h3>
             <button class="btn account_btn btn-primary show-modal">New</button>
         </div>
-        <div class="request mb-3 d-flex justify-content-center align-items-center">NOTHING YET</div>
-        <div class="request mb-3">
-            <div class="req_number d-flex mb-1">
+        <div th:if="${requests.isEmpty()}" class="request mb-3 d-flex justify-content-center align-items-center">NOTHING YET</div>
+        <div th:each="req : ${requests}" class="request mb-3" style="position: relative">
+            <div class="req_number d-flex">
                 <p class="req_title">Request number - </p>
-                <p>0088965</p>
+                <p th:text="${req.getRequestCode()}">0088965</p>
             </div>
-            <div class="req_type d-flex mb-1">
+            <div class="req_type d-flex">
                 <p class="req_title">Type of plastic - </p>
-                <p>bottles</p>
+                <p th:text="${req.getPlasticCategory().getCategory()}">bottles</p>
             </div>
-            <div class="req_weight d-flex mb-1">
+            <div class="req_type d-flex">
+                <p class="req_title">Point Address - </p>
+                <p th:text="${req.getPointAdress().getAddress()}">bottles</p>
+            </div>
+            <div class="req_weight d-flex">
                 <p class="req_title">Weight / amount - </p>
-                <p>0088965</p>
+                <p th:text="${req.getAmount()}">0088965</p>
             </div>
-            <div class="req_phone-number d-flex mb-1">
-                <p class="req_title">Phone number - </p>
-                <p>38 (063) 968 61 54</p>
+            <div class="req_weight d-flex">
+                <p class="req_title">Comment - </p>
+                <p th:text="${req.getComment()}">0088965</p>
             </div>
-            <div class="req_status d-flex mb-1">
-                <div style="background: grey; margin-top: 5px;" class="status_color mr-3"></div>
-                <p>Pending</p>
+            <div class="statuses">
+                <div th:if="${req.getStatus() == 'Pending'}" class="req_status d-flex">
+                    <div style="background: grey; margin-top: 5px;" class="status_color mr-2"></div>
+                    <p>Pending</p>
+                </div>
+                <div th:if="${req.getStatus() == 'Accepted'}" class="req_status d-flex">
+                    <div style="background: #d57200; margin-top: 5px;" class="status_color mr-2"></div>
+                    <p>Accepted</p>
+                </div>
+                <div th:if="${req.getStatus() == 'Directed'}" class="req_status d-flex">
+                    <div style="background: #0048ff; margin-top: 5px;" class="status_color mr-2"></div>
+                    <p>Directed</p>
+                </div>
+                <div th:if="${req.getStatus() == 'Recycled'}" class="req_status d-flex">
+                    <div style="background: #08ff00; margin-top: 5px;" class="status_color mr-2"></div>
+                    <p>Recycled</p>
+                </div>
+            </div>
+            <div style="position: absolute; top: 20px; right: 20px" class="action">
+                <a style="padding: 5px; background: #545454; border-radius: 5px" th:href="@{/myaccount/request/edit/{id}(id = ${req.getId()})}"><img style="width: 25px; height: 25px" th:src="@{/images/general/edit.svg}" alt="edit"></a>
+                <a onclick="confirm('Ви впевнені що бажаєте видалити запит?')" style="padding: 5px; background: #545454; border-radius: 5px" th:href="@{/myaccount/request/delete/{id}(id = ${req.getId()})}"><img style="width: 25px; height: 25px" th:src="@{/images/general/delete.svg}" alt="edit"></a>
             </div>
 
 
@@ -154,6 +211,7 @@
             }
         }
     });
+
 
 </script>
 </body>

@@ -1,10 +1,10 @@
 package com.dprsnn.UtilPlast.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Setter
+@Getter
 @Entity
 @Data
 @NoArgsConstructor
@@ -13,9 +13,10 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double weight;
-    private String phoneNumber;
-    private String additionalInfo;
+    private String amount;
+    private String comment;
+    private String requestCode;
+    private String status;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Person person;

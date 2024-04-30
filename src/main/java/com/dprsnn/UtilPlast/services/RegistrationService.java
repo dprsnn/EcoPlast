@@ -38,7 +38,6 @@ public class RegistrationService {
         person.setVerificationCode(randomCode);
         person.setEnabled(false);
         peopleRepository.save(person);
-
         sendVerificationEmail(person, siteUrl);
     }
 

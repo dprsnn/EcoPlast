@@ -27,7 +27,8 @@ public class AuthController {
     private final RegistrationService registrationService;
 
     @GetMapping("/auth/login")
-    public String loginPage(@ModelAttribute ("person") Person person){
+    public String loginPage(@ModelAttribute ("person") Person person, Model model){
+        model.addAttribute("verify", false);
         return "auth/authorisation";
     }
 
@@ -40,6 +41,7 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", true);
             return "auth/authorisation";
+
         }
 
         Thread registrationThread = new Thread(() -> {

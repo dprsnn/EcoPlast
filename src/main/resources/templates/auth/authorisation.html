@@ -105,7 +105,7 @@
 
                         <!-- 2 column grid layout -->
                         <div class="row mb-3">
-                            <a style="margin: 0 auto" href="#!">Forgot password?</a>
+                            <a style="margin: 0 auto" href="#">Forgot password?</a>
                         </div>
 
                         <!-- Submit button -->
@@ -120,8 +120,11 @@
                         <div th:if="${verify}" style="color: green" class="error mt-1">
                             Please verify your email
                         </div>
-                        <div th:if="${hasErrors == true or verify == false}" style="color: red" class="error mt-1">
-                            Incorrect login or password :(
+
+                        <div th:if="${!verify}" class="">
+                            <div th:if="${param.error}" style="color: red" class="error mt-1">
+                                Incorrect login or password :(
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -147,6 +150,20 @@
                             <div style="color: red" th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">ERROR</div>
                         </div>
 
+                        <!-- Surname input -->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input th:field="*{surname}" type="text" id="registerSurname" class="form-control" />
+                            <label class="form-label" for="registerSurname">Surname</label>
+                            <div style="color: red" th:if="${#fields.hasErrors('surname')}" class="error" th:errors="*{surname}">ERROR</div>
+                        </div>
+
+<!--                        Phone number input-->
+                        <div data-mdb-input-init class="form-outline mb-3">
+                            <input th:field="*{phoneNumber}" type="text" id="phoneNumber" class="form-control bfh-phone" data-format="+38 (ddd) ddd-dddd"/>
+                            <label class="form-label" for="phoneNumber">Phone Number</label>
+                            <div style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}">ERROR</div>
+                        </div>
+
                         <!-- Password input -->
                         <div style="position: relative" data-mdb-input-init class="form-outline mb-3">
                             <input th:field="*{password}"
@@ -166,7 +183,6 @@
                                 data-mdb-button-init
                                 data-mdb-ripple-init
                                 class="btn btn-primary btn-block mb-3 custom-btn"
-                                onclick="alert()"
                         >
                             Sign in
                         </button>
@@ -227,6 +243,7 @@
         }
     }
 </script>
+<script src="/js/bootstrap-formhelpers-phone.js"></script>
 
 </body>
 

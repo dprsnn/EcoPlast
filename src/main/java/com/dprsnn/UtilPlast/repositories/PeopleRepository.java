@@ -24,5 +24,6 @@ public interface PeopleRepository extends JpaRepository<Person, Long> {
     List<Person> findDisabled();
     Person findPersonByResetToken(String token);
     List<Person> findAllByRole(String role);
+    List<Person> findAllByEmailOrNameOrSurnameOrPhoneNumber(String email, String name, String surname, String phoneNumber);
 
 }

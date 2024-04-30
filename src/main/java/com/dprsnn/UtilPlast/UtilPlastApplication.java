@@ -29,6 +29,8 @@ public class UtilPlastApplication {
 		if (peopleRepository.findAllByRole("ROLE_ADMIN").isEmpty()){
 			Person person = new Person();
 			person.setName("admin");
+			person.setSurname("admin");
+			person.setPhoneNumber("+38 (000) 000 00-00");
 			person.setEmail("admin.email@gmail.com");
 			person.setRole("ROLE_ADMIN");
 
